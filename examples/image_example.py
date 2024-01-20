@@ -258,7 +258,7 @@ class App(customtkinter.CTk):
 
             # Save the modified DataFrame back to the same Excel file
             # df.to_excel(path_to_excel, index=False)
-            results_folder = "./results/hooghoudt"
+            results_folder = "./results/hooghoudt/"
             file_name = os.path.basename(path_to_excel)  # Extract the file name from the original path
             result_file_path = os.path.join(results_folder, file_name)
 
@@ -406,7 +406,7 @@ class App(customtkinter.CTk):
             # df['B (α),m'] = df['B Аверя(уст)']
             df['Y= В Аверя / B real'] = df['B Аверя(уст)'] / breal  
             
-            results_folder = "./results/Аверьянов"
+            results_folder = "./results/Аверьянов/"
             file_name = os.path.basename(path_to_excel)  # Extract the file name from the original path
             result_file_path = os.path.join(results_folder, file_name)
             df.to_excel(result_file_path, index=False)
@@ -446,75 +446,160 @@ class App(customtkinter.CTk):
             # Handle exceptions, display an error message, or log the error
             messagebox.showerror("Error", f"An error occurred: {str(e)}")
 
+    # def calculate_event3(self):
+    #     try:
+    #         # Retrieve values from entry widgets
+    #         path_to_excel = self.forth_entry1.get()
+
+    #         # Read Excel file
+    #         df = pd.read_excel(path_to_excel)
+    #         # C
+    #         # htot = df['Htot, m'] = pd.to_numeric(df['Htot, m'], errors='coerce')
+    #         # D
+    #         hdr = df['Hdr, m'] = pd.to_numeric(df['Hdr, m'], errors='coerce')
+    #         # E
+    #         # mm = df['m, m'] = pd.to_numeric(df['m, m'], errors='coerce')
+    #         # F
+    #         dm = df['d, m'] = pd.to_numeric(df['d, m'], errors='coerce')
+    #         # G
+    #         # wdmod = df['w(Dmod),cm'] = pd.to_numeric(df['w(Dmod),cm'], errors='coerce')
+    #         # H
+    #         wtd_m = df['Water Table Depth, m'] = pd.to_numeric(df['Water Table Depth, m'], errors='coerce')
+    #         # I
+    #         # daltaH = df['∆h=Hdr-w(DMod), m'] = pd.to_numeric(df['∆h=Hdr-w(DMod), m'], errors='coerce')
+    #         # J
+    #         # h = df['h=Hdr-m-d, m'] = pd.to_numeric(df['h=Hdr-m-d, m'], errors='coerce')
+    #         # K
+    #         # pm = df['Р, m'] = pd.to_numeric(df['Р, m'], errors='coerce')
+    #         # L
+    #         # dring = df['Drainage, cm/d'] = pd.to_numeric(df['Drainage, cm/d'], errors='coerce')
+    #         # M
+    #         dringq = df['Drainage,q m/d'] = pd.to_numeric(df['Drainage,q m/d'], errors='coerce')
+    #         # N
+    #         # qc = df['qc,m/d'] = pd.to_numeric(df['qc,m/d'], errors='coerce')
+    #         # O
+    #         k = df['K, m/d'] = pd.to_numeric(df['K, m/d'], errors='coerce')
+    #         # P
+    #         breal = df['Breal, m'] = pd.to_numeric(df['Breal, m'], errors='coerce')
+
+    #         df['∆h=Hdr-w(DMod), m'] = hdr - wtd_m
+    #         daltaH = df['∆h=Hdr-w(DMod), m']
+    #         df['h=Hdr-m-d, m'] = hdr - 0.75 - dm
+    #         h = df['h=Hdr-m-d, m']
+
+    #         # bbbb = df['B костяков, m']=(np.pi*k*daltaH)/(dringq*(np.log(bbbb/dm)-1))
+    #         df['B костяков, m'] = 25
+    #         df['s'] = 0
+    #         s = df['s']
+
+    #         # iterations = 25
+    #         for num in s:
+    #             if num != 25:
+    #                 s = df['B костяков, m'] = (np.pi * k * daltaH) / (dringq * (np.log(df['B костяков, m'] / dm) - 1))
+    #                 num = s
+
+    #         df['B костяков, m'] = s
+    #         df['B real/B костяков'] = (breal / df['B костяков, m']  )
+    #         df['B костяков для проекта, m'] = (np.pi * k * h) / (dringq * (np.log(df['B костяков, m'] / dm) - 1))
+    #         df['B костяков для проекта, m/B real'] = (df['B костяков для проекта, m'] / breal)
+
+    #         results_folder = "./results/Костиков"
+    #         file_name = os.path.basename(path_to_excel)  # Extract the file name from the original path
+    #         result_file_path = os.path.join(results_folder, file_name)
+
+    #         df.to_excel(result_file_path, index=False)
+    #         # Optionally, you can display a success message
+    #         arithmetic_mean_Y = df['B real/B костяков'].mean()
+    #         messagebox.showinfo("Success", "Data saved successfully.")
+    #         self.textbox_forth_frame.insert("1.0", f"B real/B костяков=:\n {str(arithmetic_mean_Y)}\n")
+
+    #         x = df['Date']
+    #         y = df['B real/B костяков'] = pd.to_numeric(df['B real/B костяков'],
+    #                                                                    errors='coerce')
+    #         #print(y)
+    #         #print(x)
+
+    #         # plt.plot(x, y, 'k.', linewidth=2.0)
+    #         # plt.show()
+
+    #         fig, ax = plt.subplots()
+    #         ax.plot(x, y, linewidth=2.0)
+    #         plt.show()
+
+    #         # arithmetic_mean_Y = df['L hooghoudt / У=L(real)'].mean()
+    #         # arithmetic_mean_Y = df['L hooghoudt / У=L(real)'].mean()
+    #         # # arithmetic_gmean_Y = gmean(df['У=L(real) /L hooghoudt'])  # Use gmean from scipy.stats
+
+    #         # # Display the arithmetic mean in the designated textbox
+    #         # self.textbox_second_frame.insert("1.0", f"Y (Констант) mean:\n {str(arithmetic_mean_Y)}\n")
+    #         # # self.textbox_second_frame2.insert("1.0", f"Y (Констант) geomean:\n {str(arithmetic_gmean_Y)}\n")
+    #     except Exception as e:
+    #         # Handle exceptions, display an error message, or log the error
+    #         messagebox.showerror("Error", f"An error occurred: {str(e)}")
     def calculate_event3(self):
         try:
             # Retrieve values from entry widgets
             path_to_excel = self.forth_entry1.get()
-
+            
+            
             # Read Excel file
             df = pd.read_excel(path_to_excel)
-            # C
+            #C
             # htot = df['Htot, m'] = pd.to_numeric(df['Htot, m'], errors='coerce')
-            # D
+            #D
             hdr = df['Hdr, m'] = pd.to_numeric(df['Hdr, m'], errors='coerce')
-            # E
+            #E
             # mm = df['m, m'] = pd.to_numeric(df['m, m'], errors='coerce')
-            # F
+            #F
             dm = df['d, m'] = pd.to_numeric(df['d, m'], errors='coerce')
-            # G
+            #G
             # wdmod = df['w(Dmod),cm'] = pd.to_numeric(df['w(Dmod),cm'], errors='coerce')
-            # H
-            wtd_m = df['Water Table Depth, m'] = pd.to_numeric(df['Water Table Depth, m'], errors='coerce')
-            # I
+            #H
+            wtd_cm = df['Water Table Depth, m'] = pd.to_numeric(df['Water Table Depth, m'], errors='coerce')
+            #I
             # daltaH = df['∆h=Hdr-w(DMod), m'] = pd.to_numeric(df['∆h=Hdr-w(DMod), m'], errors='coerce')
-            # J
+            #J
             # h = df['h=Hdr-m-d, m'] = pd.to_numeric(df['h=Hdr-m-d, m'], errors='coerce')
-            # K
+            #K
             # pm = df['Р, m'] = pd.to_numeric(df['Р, m'], errors='coerce')
-            # L
+            #L
             # dring = df['Drainage, cm/d'] = pd.to_numeric(df['Drainage, cm/d'], errors='coerce')
-            # M
+            #M
             dringq = df['Drainage,q m/d'] = pd.to_numeric(df['Drainage,q m/d'], errors='coerce')
-            # N
+            #N
             # qc = df['qc,m/d'] = pd.to_numeric(df['qc,m/d'], errors='coerce')
-            # O
+            #O
             k = df['K, m/d'] = pd.to_numeric(df['K, m/d'], errors='coerce')
-            # P
+            #P
             breal = df['Breal, m'] = pd.to_numeric(df['Breal, m'], errors='coerce')
-
-            df['∆h=Hdr-w(DMod), m'] = hdr - wtd_m
+            
+            
+            df['∆h=Hdr-w(DMod), m']=np.abs(hdr - wtd_cm)
             daltaH = df['∆h=Hdr-w(DMod), m']
-            df['h=Hdr-m-d, m'] = hdr - 0.75 - dm
+            df['h=Hdr-m-d, m']=hdr-0.75-dm
             h = df['h=Hdr-m-d, m']
-
+            
             # bbbb = df['B костяков, m']=(np.pi*k*daltaH)/(dringq*(np.log(bbbb/dm)-1))
-            df['B костяков, m'] = 25
-            df['s'] = 0
-            s = df['s']
-
-            # iterations = 25
-            for num in s:
-                if num != 25:
-                    s = df['B костяков, m'] = (np.pi * k * daltaH) / (dringq * (np.log(df['B костяков, m'] / dm) - 1))
-                    num = s
+            df['B костяков, m'] = 1.0
+            iterations = 25
+            for _ in range(iterations):
+                s=df['B костяков, m'] = (np.pi * k * daltaH) / (dringq * (np.log(df['B костяков, m'] / dm) - 1))
 
             df['B костяков, m'] = s
-            df['B костяков/B real'] = (df['B костяков, m'] / breal)
-            df['B костяков для проекта, m'] = (np.pi * k * h) / (dringq * (np.log(df['B костяков, m'] / dm) - 1))
-            df['B костяков для проекта, m/B real'] = (df['B костяков для проекта, m'] / breal)
+            df['B real/B костиков']=(breal/df['B костяков, m'])
+            # df['B костиков для проекта, m']=(np.pi*k*h)/dringq*(np.log(breal/dm)-2)
 
-            results_folder = "./results/Костиков"
+            results_folder = "./results/Костяков/"
             file_name = os.path.basename(path_to_excel)  # Extract the file name from the original path
-            result_file_path = os.path.join(results_folder, file_name)
+            result_file_path = os.path.join(results_folder, "Костяков.xlsx")
 
             df.to_excel(result_file_path, index=False)
             # Optionally, you can display a success message
-            arithmetic_mean_Y = df['B костяков/B real'].mean()
+            arithmetic_mean_Y = df['B real/B костиков'].mean()
             messagebox.showinfo("Success", "Data saved successfully.")
-            self.textbox_forth_frame.insert("1.0", f"B костяков/B real=:\n {str(arithmetic_mean_Y)}\n")
-
+            self.textbox_forth_frame.insert("1.0", f"B real/B костиков=:\n {str(arithmetic_mean_Y)}\n")
             x = df['Date']
-            y = df['B костяков для проекта, m/B real'] = pd.to_numeric(df['B костяков для проекта, m/B real'],
+            y = df['B real/B костиков'] = pd.to_numeric(df['B real/B костиков'],
                                                                        errors='coerce')
             #print(y)
             #print(x)
@@ -525,7 +610,6 @@ class App(customtkinter.CTk):
             fig, ax = plt.subplots()
             ax.plot(x, y, linewidth=2.0)
             plt.show()
-
             # arithmetic_mean_Y = df['L hooghoudt / У=L(real)'].mean()
             # arithmetic_mean_Y = df['L hooghoudt / У=L(real)'].mean()
             # # arithmetic_gmean_Y = gmean(df['У=L(real) /L hooghoudt'])  # Use gmean from scipy.stats
@@ -536,7 +620,7 @@ class App(customtkinter.CTk):
         except Exception as e:
             # Handle exceptions, display an error message, or log the error
             messagebox.showerror("Error", f"An error occurred: {str(e)}")
-
+            
     def select_frame_by_name(self, name):
         # set button color for selected button
         self.home_button.configure(fg_color=("gray75", "gray25") if name == "home" else "transparent")
